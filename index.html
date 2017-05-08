@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Jordan Angular App</title>
+
+        <!-- Style Sheets -->
+        <link rel="stylesheet" href="node_modules/angular-material/angular-material.css" />
+        <link rel="stylesheet" href="node_modules/angular-material/angular-material.layouts.css" />
+        <link rel="stylesheet" href="app.css" />
+        <!-- Scripts -->
+        <script src="node_modules/angular/angular.js"></script>
+        <script src="node_modules/angular-material/angular-material.js"></script>
+        <script src="app.module.js"></script>
+        <script src="app.controller.js"></script>
+        <script src="userSetting.service.js"></script>
+        <script src="data.factory.js"></script>
+    </head>
+
+    <body ng-app="app">
+        <div
+            layout-fill
+            ng-controller="AppController as vm">
+            <div
+                layout-padding>
+                <table class="client-list-table" ng-if="vm.clients.length">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="column in vm.columns">{{::column.title}}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="client in vm.clients track by $index">
+                            <td
+                                layout-padding
+                                class="info-cell"
+                                ng-repeat="column in vm.columns track by $index">
+                                {{::vm.formatColumnValues(column, client)}}
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </body>
+
+</html>
